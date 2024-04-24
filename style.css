@@ -40,7 +40,8 @@ section {
     display: flex;
 }
 
-section ul, a {
+section ul,
+a {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -50,6 +51,10 @@ section ul, a {
     text-decoration: none;
     color: #000000;
     margin: 10px;
+}
+
+section a:hover {
+    opacity: 0.8;
 }
 
 nav ul {
@@ -69,12 +74,17 @@ nav a {
 }
 
 footer {
-    background-color: #333;
+    background-color: #343a40;
     color: #fff;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 16px;
+    position:
+}
+
+.fixed-footer {
     position: fixed;
     bottom: 0;
     left: 0;
