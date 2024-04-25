@@ -1,18 +1,18 @@
-function getUfFromURL() {
+function getEstadoFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('uf');
+  return urlParams.get('estado');
 }
 
 function updatePageTitleAndHeader() {
-  const uf = getUfFromURL();
+  const uf = getEstadoFromURL();
   if (uf) {
-    document.title = `Município de ${uf}`;
+    document.title = `Página do ${uf}`;
     const h3Title = document.querySelector('#htres');
     if (h3Title) {
-      h3Title.textContent = `${uf}`;
+      h3Title.textContent = `Informações sobre ${uf}`;
     }
   }
-}
+} 
 
 function fetchPokemonData() {
   const estado = getEstadoFromURL();
