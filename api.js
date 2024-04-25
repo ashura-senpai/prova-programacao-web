@@ -1,16 +1,24 @@
-function getNomeFromURL() {
+function getUFFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('nome');
+  return urlParams.get('uf');
 }
 
 function updatePageTitleAndHeader() {
-  const nome = getNomeFromURL();
-  if (nome) {
-    document.title = `Página do ${nome}`;
-    const h3Title = document.querySelector('#htres');
-    if (h3Title) {
-      h3Title.textContent = `${nome}`;
-    }
+  const uf = getUFFromURL();
+  if (uf) {
+    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}`)
+      .then(response => response.json())
+      .then(data => {
+        const sigla = data.sigla;
+        document.title = `MUNICÍPIOS DE ${sigla}`;
+        const h4Title = document.querySelector('#htres');
+        if (h4Title) {
+          h4Title.textContent = `${sigla}`;
+        }
+      })
+      .catch(error => {
+        console.error("Erro ao buscar o nome do estado:", error);
+      });
   }
 }
 
@@ -32,18 +40,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   favForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (favForm) {
-      const favs = JSON.parse(localStorage.getItem('favoritos')) || [];
-      favs.push(favForm);
-      localStorage.setItem('favs', JSON.stringify(favs));
-      loadTodoList();
-    }
+    const favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+    favs.push(document.title);
+    localStorage.setItem('favoritos', JSON.stringify(favs));
+    loadTodoList();
   });
 });
 
 function main() {
   updatePageTitleAndHeader();
-  fetchPokemonData();
 }
 
 window.onload = main;
