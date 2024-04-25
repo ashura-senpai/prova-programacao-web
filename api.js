@@ -12,11 +12,16 @@ function updatePageTitleAndHeader() {
         document.title = `Municípios de ${uf}`;
 
         const municipiosList = document.querySelector('#municipios-list');
+        const municipiosButton = document.querySelector('#municipios-button');
         if (municipiosList) {
           data.forEach(municipio => {
             const li = document.createElement('li');
             li.textContent = municipio.nome;
             municipiosList.appendChild(li);
+
+            const button = document.createElement('button');
+            button.textContent = `FAVORITAR`;
+            municipiosButton.appendChild(button);
           });
         }
       })

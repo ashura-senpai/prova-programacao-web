@@ -11,11 +11,16 @@
 <body>
 
   <style>
-    form {
+    main {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 13px;
+      margin-bottom: 60px;
+    }
+
+    section ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: self-end;
+      gap: 15px;
     }
 
     button {
@@ -46,11 +51,9 @@
   <main>
     <section>
       <ul id="municipios-list">
-        
       </ul>
-      <form id="favorito-form">
-        <button type="submit">FAVORITAR</button>
-      </form>
+      <ul id="municipios-button">
+      </ul>
     </section>
   </main>
 
