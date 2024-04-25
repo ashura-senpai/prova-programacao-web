@@ -6,7 +6,7 @@ function getUFFromURL() {
 function updatePageTitleAndHeader() {
   const uf = getUFFromURL();
   if (uf) {
-    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}`)
+    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/distritos/${uf}`)
       .then(response => response.json())
       .then(data => {
         const sigla = data.sigla;
