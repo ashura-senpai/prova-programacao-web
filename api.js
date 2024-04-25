@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const favList = document.getElementById('todo-list');
 
   function loadTodoList() {
-    const favs = JSON.parse(localStorage.getItem('favs')) || [];
+    const favs = JSON.parse(localStorage.getItem('favoritos')) || [];
     favList.innerHTML = '';
     favs.forEach(todo => {
       const li = document.createElement('li');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   favForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (favForm) {
-      const favs = JSON.parse(localStorage.getItem('favs')) || [];
+      const favs = JSON.parse(localStorage.getItem('favoritos')) || [];
       favs.push(favForm);
       localStorage.setItem('favs', JSON.stringify(favs));
       loadTodoList();
