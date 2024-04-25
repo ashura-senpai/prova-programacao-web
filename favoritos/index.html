@@ -11,7 +11,7 @@
 <body>
 
   <header id="header">
-    <h1>Estados do Brasil</h1>
+    <h1>Municípios Favoritos</h1>
   </header>
 
   <nav aria-label="Navegação principal">
@@ -23,7 +23,8 @@
 
   <main>
     <section>
-      <h4 id="htres">{FAVORITOS}</h4>
+      <ul id="todo-list">
+      </ul>
     </section>
   </main>
 
@@ -34,6 +35,24 @@
   </footer>
 
   <script src="../api.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const favList = document.getElementById('todo-list');
+
+      function loadTodoList() {
+        const favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+        favList.innerHTML = '';
+        favs.forEach(municipio => {
+          const li = document.createElement('li');
+          li.textContent = municipio;
+          favList.appendChild(li);
+        });
+      }
+
+      loadTodoList();
+    });
+  </script>
 
 </body>
 

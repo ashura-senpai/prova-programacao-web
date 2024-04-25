@@ -12,7 +12,6 @@ function updatePageTitleAndHeader() {
         document.title = `Municípios de ${uf}`;
 
         const municipiosList = document.querySelector('#municipios-list');
-        const municipiosButton = document.querySelector('#municipios-button');
         if (municipiosList) {
           data.forEach(municipio => {
             const li = document.createElement('li');
@@ -21,7 +20,10 @@ function updatePageTitleAndHeader() {
 
             const button = document.createElement('button');
             button.textContent = `FAVORITAR`;
-            municipiosButton.appendChild(button);
+            button.addEventListener('click', () => {
+              addToFavorites(municipio.nome);
+            });
+            li.appendChild(button);
           });
         }
       })
@@ -29,6 +31,12 @@ function updatePageTitleAndHeader() {
         console.error("Erro ao buscar os municípios:", error);
       });
   }
+}
+
+function addToFavorites(municipioNome) {
+  const favs = JSON.parse(localStorage.getItem('favoritos')) || [];
+  favs.push(municipioNome);
+  localStorage.setItem('favoritos', JSON.stringify(favs));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
