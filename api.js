@@ -1,18 +1,18 @@
 function getEstadoFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('estado');
+  return urlParams.get('nome');
 }
 
 function updatePageTitleAndHeader() {
-  const uf = getEstadoFromURL();
-  if (uf) {
-    document.title = `Página do ${uf}`;
+  const nome = getEstadoFromURL();
+  if (nome) {
+    document.title = `Página do ${nome}`;
     const h3Title = document.querySelector('#htres');
     if (h3Title) {
-      h3Title.textContent = `Informações sobre ${uf}`;
+      h3Title.textContent = `Informações sobre ${nome}`;
     }
   }
-} 
+}
 
 function main() {
   updatePageTitleAndHeader();
