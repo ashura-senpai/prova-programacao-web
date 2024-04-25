@@ -1,10 +1,10 @@
-function getEstadoFromURL() {
+function getNomeFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get('nome');
 }
 
 function updatePageTitleAndHeader() {
-  const nome = getEstadoFromURL();
+  const nome = getNomeFromURL();
   if (nome) {
     document.title = `Página do ${nome}`;
     const h3Title = document.querySelector('#htres');
