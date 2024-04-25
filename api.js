@@ -6,21 +6,35 @@ function getUFFromURL() {
 function updatePageTitleAndHeader() {
   const uf = getUFFromURL();
   if (uf) {
-    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/distritos/${uf}`)
+    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
       .then(response => response.json())
       .then(data => {
-        const sigla = data.sigla;
-        document.title = `MUNICÍPIOS DE ${sigla}`;
-        const h4Title = document.querySelector('#htres');
-        if (h4Title) {
-          h4Title.textContent = `${sigla}`;
+        document.title = `Municípios de ${uf}`;
+
+        const municipiosList = document.querySelector('#municipios-list');
+        if (municipiosList) {
+          data.forEach(municipio => {
+            const li = document.createElement('li');
+            li.textContent = municipio.nome;
+            municipiosList.appendChild(li);
+          });
         }
       })
       .catch(error => {
-        console.error("Erro ao buscar o nome do estado:", error);
+        console.error("Erro ao buscar os municípios:", error);
       });
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const estadoLinks = document.querySelectorAll('.estado-link');
+  estadoLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const estado = e.target.textContent;
+      localStorage.setItem('estadoSelecionado', estado);
+    });
+  });
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   const favForm = document.getElementById('favorito-form');
